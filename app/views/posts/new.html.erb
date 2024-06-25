@@ -1,23 +1,5 @@
 <h1>
   New Post
 </h1>
-<%= form_with model: @post do |f| %>
-  <div>
-    <%= f.label :title %>
-    <%= f.text_field :title, required: true, minlength: 3, placeholder: 'Title' %>
-  </div>
 
-  <div>
-    <%= f.label :content %>
-    <%= f.text_area :content, required: true, minlength: 3, placeholder: 'Content' %>
-  </div>
-
-    <div>
-    <%= f.label :status %>
-    <%= f.text_field :status, required: true, placeholder: 'Post status' %>
-  </div>
-
-  <div>
-    <%= f.submit 'Submit question' %>
-  </div>
-<% end %>
+<%= render 'form' %>
