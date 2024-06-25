@@ -29,10 +29,14 @@ class PostsController < ApplicationController
     end
   end
 
+  def show
+    @post = Post.find_by(id: params[:id])
+  end
+
   def destroy
-    @post = Post.find(params[:id])
+    @post = Post.find_by(id: params[:id])
     @post.destroy
-    
+
     redirect_to posts_path
   end
 
