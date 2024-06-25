@@ -1,3 +1,3 @@
 class Post < ApplicationRecord
-  validates :title, presence: true, length: { minimum: 3 }
+  validates :title, :content, :status, presence: true
 end
