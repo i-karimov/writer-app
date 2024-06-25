@@ -3,4 +3,6 @@
 
 <% @posts.each do |post | %>
   <%= post.title %>
+  <br>
+  <%= link_to 'Edit', edit_post_path(post) %>
 <% end %>

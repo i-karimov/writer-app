@@ -16,6 +16,19 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+    @post = Post.find_by(id: params[:id])
+  end
+
+  def update
+    @post = Post.new(post_params)
+    if @post.save
+      redirect_to posts_path
+    else
+      render :edit
+    end
+  end
+
   private
 
   def post_params
