@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   has_many_attached :images
   has_many_attached :files
 
-  aasm(:status, column: :status) do
+  aasm(column: :status) do
     state :draft, initial: true
     state :on_moderation
     state :approved

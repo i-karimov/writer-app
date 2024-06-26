@@ -8,16 +8,20 @@
     <%= f.label :content, class: "col-sm-2 col-form-label" %>
     <%= f.text_area :content,  placeholder: 'Content', class: 'form-control col-sm-10', rows: 10 %>
   </div>
-  <div class="form-group mb-3 row">
-    <%= f.label :status, class: "col-sm-2 col-form-label" %>
-    <%= f.text_field :status, placeholder: 'Post status', class: 'form-control' %>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="inputGroupSelect01">Status</label>
+    </div>
+    <%= f.select :status, Post.aasm.states_for_select, class: "custom-select" %>
   </div>
+
   <div class="form-group mb-3 row">
-    <%= f.label :images, class: "col-sm-2 col-form-label" %>
+    <%= f.label "Images (#{@post.images.size})", class: "col-sm-2 col-form-label" %>
     <%= f.file_field :images, multiple: true, class: 'form-control' %>
   </div>
   <div class="form-group mb-3 row">
-    <%= f.label :files, class: "col-sm-2 col-form-label" %>
+    <%= f.label "Files (#{@post.files.size})", class: "col-sm-2 col-form-label" %>
     <%= f.file_field :files, multiple: true, class: 'form-control' %>
   </div>
   <%= f.submit 'Submit', class: 'btn btn-primary' %>
