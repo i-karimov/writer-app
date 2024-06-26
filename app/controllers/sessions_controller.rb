@@ -1,11 +1,14 @@
 class SessionsController < ApplicationController
+  before_action :ensure_unsigned_in, only: %i[new create]
+  before_action :require_authentication, only: :destroy
+
   def new; end
 
   def create
     user = User.find_by(email: params[:email])
 
     if user&.authenticate(params[:password])
-      session[:user_id] = user.id
+      sign_in(user)
       flash[:success] = "Welcome to App, #{user.first_name}!"
       redirect_to posts_path
     else
@@ -15,7 +18,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session.delete :user_id
+    sign_out
     redirect_to new_session_path
   end
 end
