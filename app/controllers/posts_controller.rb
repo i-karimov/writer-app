@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :load_post!, only: %i[show edit update destroy]
   def index
-    @posts = Post.all
+    @posts = Post.order(created_at: :desc)
   end
 
   def new
