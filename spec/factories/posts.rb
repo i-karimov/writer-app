@@ -10,7 +10,7 @@ end
 # Table name: posts
 #
 #  id         :bigint           not null, primary key
-#  content    :text
+#  content    :text             not null
 #  status     :string           not null
 #  title      :string           not null
 #  created_at :datetime         not null
