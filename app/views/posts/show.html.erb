@@ -1,9 +1,18 @@
-
-
-  <div class="row">
-    <div class="col-md-8 offset-md-2">
-      <h1 class="display-4"><%= @post.title %></h1>
-       <p><%= content_tag(:span, @post.status, class: "badge rounded-pill text-bg-warning") %> </p>
-      <p class="lead"><%= @post.content %></p>
+<div class="row">
+  <div class="col">
+    <h1 class="display-4"><%= @post.title %></h1>
+    <p><%= content_tag(:span, @post.status, class: "badge rounded-pill text-bg-warning") %> </p>
+    <div class="mb-2">
+      <%= link_to "Edit", edit_post_path(@post, tab: @tab), class: 'btn btn-outline-primary btn-sm'  %>
+      <%= link_to "Back", posts_path, class: 'btn btn-outline-secondary btn-sm' %>
+      <%= link_to "Destroy", @post, class: 'btn btn-outline-secondary btn-sm', method: :delete %>
     </div>
+    <%= @post.images.map { |img| img.content_type. } %>
+    <p class="lead"><%= @post.content %></p>
   </div>
+</div>
+<div class="row">
+  <br />
+  <h1>Images</h1>
+  <%= render 'shared/images', object: @post %>
+</div>
