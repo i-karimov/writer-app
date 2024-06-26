@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_secure_password
 
   validates :email, presence: true, uniqueness: true
+  validates :first_name, :email, presence: true
 end
 
 # == Schema Information
