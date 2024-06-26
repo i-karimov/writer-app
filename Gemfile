@@ -42,6 +42,7 @@ gem 'bootsnap', require: false
 gem 'aasm'
 gem 'image_processing', '~> 1.2'
 gem 'kaminari'
+gem 'ransack'
 gem 'valid_email2'
 
 group :development, :test do
