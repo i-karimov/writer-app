@@ -26,7 +26,7 @@ class PostsController < ApplicationController
       @post.files.attach(post_params[:files]) unless @post.files.attached?
 
       flash[:success] = 'Post updated successfully'
-      redirect_to posts_path
+      render :show
     else
       render :edit
     end
