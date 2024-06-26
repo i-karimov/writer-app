@@ -7,12 +7,11 @@
       <%= link_to "Back", posts_path, class: 'btn btn-outline-secondary btn-sm' %>
       <%= link_to "Destroy", @post, class: 'btn btn-outline-secondary btn-sm', method: :delete %>
     </div>
-    <%= @post.images.map { |img| img.content_type. } %>
     <p class="lead"><%= @post.content %></p>
   </div>
 </div>
 <div class="row">
-  <br />
+  <hr />
   <h1>Images</h1>
   <%= render 'shared/images', object: @post %>
 </div>
