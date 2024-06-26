@@ -1,5 +1,11 @@
-<% object.images.each do |image| %>
-  <div class="col">
+<% if object.images.any? %>
+  <% object.images.each do |image| %>
+    <div class="col">
       <%=  image_tag(image, width: '200px', class: "img-thumbnail rounded") %>
+    </div>
+  <% end %>
+<% else %>
+  <div class="row text-center text-muted ">
+    <p>No images</p>
   </div>
 <% end %>
