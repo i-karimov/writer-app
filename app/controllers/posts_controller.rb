@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
   before_action :load_post!, only: %i[show edit update destroy]
   def index
-    @posts = Post.order(created_at: :desc).page(params[:page])
+    @q = Post.ransack(params[:search])
+    @posts = @q.result.page(params[:page])
   end
 
   def new
