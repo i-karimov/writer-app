@@ -9,16 +9,12 @@
             class: 'nav-link px-2', current_page: current_page %></li>
         </ul>
         <ul class="nav col-12 col-lg-auto mb-2 mb-md-0">
-          <% if user_signed_in? %>
-            <li>
-              <a class="nav-link px-2">
-                <%= current_user.first_name %>
-              </a>
-            </li>
-          <% else %>
-            <li><%= nav_tab 'Sign up', new_user_path,
+          <li><%= nav_tab 'Sign up', new_user_path,
               class: 'nav-link px-2', current_page: current_page %></li>
-          <% end %>
+          <li><%= nav_tab 'Sign in', new_session_path,
+              class: 'nav-link px-2', current_page: current_page %></li>
+          <li><%= nav_tab 'Log out', session_path,
+          class: 'nav-link px-2', current_page: current_page, method: :delete %></li>
         </ul>
       </nav>
     </div>
