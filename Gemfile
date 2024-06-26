@@ -62,3 +62,4 @@ group :development do
 end
 
 gem 'aasm'
+gem 'kaminari'

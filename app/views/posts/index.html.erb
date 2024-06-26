@@ -1,9 +1,9 @@
 <% currently_at 'Posts' %>
-
 <h1>Posts</h1>
-
-<%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
-
+<%= link_to 'New Post', new_post_path, class: 'btn btn-primary my-2' %>
+<div class="my-2">
+  <%= paginate @posts %>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -18,3 +18,6 @@
     <%= render @posts %>
   </tbody>
 </table>
+<div class="py-2">
+  <%= paginate @posts %>
+</div>
