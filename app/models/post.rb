@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   validate :attachments_extension
 
   has_many_attached :images
+  has_many_attached :files
 
   private
 

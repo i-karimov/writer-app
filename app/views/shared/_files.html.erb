@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="list-inline">
+        <% @post.files.each do |file| %>
+          <li class="list-inline-item">
+            <%= link_to rails_blob_path(file, disposition: "attachment", tab: :files) do %>
+              <%= image_tag "file.png", width: '50px', alt: "Download file" %>
+              <span class="text-dark">
+                <%= p file.blob.filename.to_s.truncate(20, omission: "...#{file.blob.filename.extension}") %>
+              </span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
