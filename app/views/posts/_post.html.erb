@@ -1,0 +1,14 @@
+<tr>
+  <th scope="row" class="text-muted"> <%= post.id %></th>
+  <td> <%= post.title %> </td>
+  <td> <%= post.images.size %> </td>
+  <td> <%= post.files.size %> </td>
+  <td> <%= content_tag :span, post.status, class: status_badge_class(post.status) %> </td>
+  <td>
+    <div class="btn-group btn-group-sm" role="group">
+      <%= link_to 'Edit', edit_post_path(post), class: "btn btn-outline-secondary" %>
+      <%= link_to 'Show', post_path(post), class: "btn btn-outline-secondary" %>
+      <%= link_to 'Delete', post_path(post), class: "btn btn-outline-secondary", data: { method: :delete, confirm: 'Are you sure?' } %>
+    </div>
+  </td>
+</tr>
