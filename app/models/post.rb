@@ -1,10 +1,30 @@
 class Post < ApplicationRecord
+  include AASM
   validates :title, :content, :status, presence: true
 
   validate :attachments_extension
 
   has_many_attached :images
   has_many_attached :files
+
+  aasm(:status, column: :status) do
+    state :draft, initial: true
+    state :on_moderation
+    state :approved
+    state :rejected
+
+    event :submit do
+      transitions from: :draft, to: :on_moderation
+    end
+
+    event :approve do
+      transitions from: :on_moderation, to: :approved
+    end
+
+    event :reject do
+      transitions from: :on_moderation, to: :rejected
+    end
+  end
 
   private
 
