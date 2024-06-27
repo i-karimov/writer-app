@@ -4,6 +4,8 @@ class Post < ApplicationRecord
 
   validate :attachments_extension
 
+  belongs_to :region
+  
   has_many_attached :images
   has_many_attached :files
 
@@ -45,4 +47,13 @@ end
 #  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  region_id  :bigint           not null
+#
+# Indexes
+#
+#  index_posts_on_region_id  (region_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (region_id => regions.id)
 #

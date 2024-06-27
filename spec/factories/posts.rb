@@ -15,4 +15,13 @@ end
 #  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  region_id  :bigint           not null
+#
+# Indexes
+#
+#  index_posts_on_region_id  (region_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (region_id => regions.id)
 #
