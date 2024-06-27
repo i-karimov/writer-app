@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :load_post!, only: %i[show edit update destroy]
   def index
     @q = Post.ransack(params[:q])
-    @posts = @q.result.includes(:region, :user).page(params[:page])
+    @posts = @q.result.includes(:region).page(params[:page])
   end
 
   def new
