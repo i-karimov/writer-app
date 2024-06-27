@@ -8,9 +8,9 @@ class User < ApplicationRecord
   validate :password_complexity
   validate :password_presence
 
-  belongs_to :region, opttional: true
+  belongs_to :region, optional: true
   has_many :posts
-  
+
   private
 
   def password_complexity
@@ -39,7 +39,7 @@ end
 #  password_digest :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  region_id       :bigint           not null
+#  region_id       :bigint
 #
 # Indexes
 #

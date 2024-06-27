@@ -4,6 +4,15 @@ FactoryBot.define do
     first_name { FFaker::Name.unique.first_name }
     last_name { FFaker::Name.unique.last_name }
     middle_name { FFaker::Lorem.unique.word }
+    password { '#13R1fr:wx,E' }
+    password_confirmation { '#13R1fr:wx,E' }
+    association :region
+
+    trait :with_posts do
+      after(:create) do |user|
+        user.posts << build_list(:post, 5, user:, region: user.region)
+      end
+    end
   end
 end
 
@@ -19,7 +28,7 @@ end
 #  password_digest :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  region_id       :bigint           not null
+#  region_id       :bigint
 #
 # Indexes
 #

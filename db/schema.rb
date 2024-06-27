@@ -68,7 +68,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_162133) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "region_id", null: false
+    t.bigint "region_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["region_id"], name: "index_users_on_region_id"
   end

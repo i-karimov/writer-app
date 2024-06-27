@@ -5,7 +5,7 @@ class Post < ApplicationRecord
   validate :attachments_extension
 
   belongs_to :region
-  belong_to :user
+  belongs_to :user
 
   has_many_attached :images
   has_many_attached :files
