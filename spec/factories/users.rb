@@ -15,7 +15,6 @@ FactoryBot.define do
     end
   end
 end
-
 # == Schema Information
 #
 # Table name: users
