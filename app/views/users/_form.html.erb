@@ -17,6 +17,12 @@
     <%= f.text_field :last_name, class: 'form-control form-control-lg' %>
   </div>
   <% if @user.new_record? %>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelect01">Region</label>
+      </div>
+      <%= f.select :region_id, Region.pluck(:name, :id), class: "custom-select" %>
+    </div>
     <div class="form-group mb-3 row">
       <%= f.label :password, class: "col-sm-2 col-form-label" %>
       <%= f.password_field :password, class: 'form-control form-control-lg' %>

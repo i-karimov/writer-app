@@ -9,6 +9,13 @@
     <%= f.text_area :content,  placeholder: 'Content', class: 'form-control col-sm-10', rows: 10 %>
   </div>
 
+   <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="inputGroupSelect01">Region</label>
+    </div>
+    <%= f.select :region_id, @regions.pluck(:name, :id), class: "custom-select" %>
+  </div>
+
   <div class="input-group mb-3">
     <div class="input-group-prepend">
       <label class="input-group-text" for="inputGroupSelect01">Status</label>

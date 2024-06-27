@@ -19,7 +19,9 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @regions = Region.all
+  end
 
   def update
     if @post.update(post_params.except(:images, :files)) # TODO: move to form object eventually
@@ -46,7 +48,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :status, images: [], files: [])
+    params.require(:post).permit(:title, :content, :status, :region_id, images: [], files: [])
   end
 
   def load_post!

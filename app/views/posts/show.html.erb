@@ -3,6 +3,7 @@
   <div class="col">
     <h1 class="display-4"><%= @post.title %></h1>
     <p><%= content_tag :span, @post.status, class: status_badge_class(@post.status) %> </p>
+    <h4 class="text-secondary"><%= @post.region.name %> </h4>
     <div class="mb-2">
       <%= link_to "Edit", edit_post_path(@post, tab: @tab), class: 'btn btn-outline-primary btn-sm'  %>
       <%= link_to "Back", posts_path, class: 'btn btn-outline-secondary btn-sm' %>
@@ -13,11 +14,11 @@
 </div>
 <div class="row">
   <hr />
-  <h1>Images</h1>
+  <h2>Images</h2>
   <%= render 'shared/images', object: @post %>
 </div>
 <div class="row">
   <hr />
-  <h1>Files</h1>
+  <h2>Files</h2>
   <%= render 'shared/files', object: @post %>
 </div>
