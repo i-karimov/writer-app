@@ -29,7 +29,9 @@ class Post < ApplicationRecord
     end
   end
 
-  private
+  ransacker :created_at do
+    Arel.sql('date(created_at)')
+  end
 
   def attachments_extension
     return if images.all? { |img| img.content_type =~ /^image/ }
@@ -42,7 +44,7 @@ class Post < ApplicationRecord
   end
 
   def self.ransackable_associations(_auth_object = nil)
-    []
+    %w[region user created_at]
   end
 end
 

@@ -3,6 +3,10 @@ class Region < ApplicationRecord
 
   has_many :post
   has_many :users
+
+  def self.ransackable_attributes(auth_object = nil) 
+    ["name"]
+  end
 end
 
 # == Schema Information
