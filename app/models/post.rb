@@ -1,5 +1,8 @@
 class Post < ApplicationRecord
   include AASM
+
+  default_scope { order(created_at: :desc) }
+  
   validates :title, :content, :status, presence: true
 
   validate :attachments_extension

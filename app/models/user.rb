@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
 
+  default_scope { order(created_at: :desc) }
+
   validates :email, presence: true, 'valid_email2/email': true
   validates :email, uniqueness: true
 

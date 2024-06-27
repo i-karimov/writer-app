@@ -1,5 +1,5 @@
 <%= render 'shared/errors', object: @user %>
-<%= form_with model: @user do |f| %>
+<%= form_with model: [:admin, @user] do |f| %>
   <div class="form-group mb-3 row">
     <%= f.label :email, class: "col-sm-2 col-form-label" %>
     <%= f.email_field :email, placeholder: 'Enter you email', class: 'form-control form-control-lg' %>
@@ -26,7 +26,7 @@
     <div class="input-group-prepend">
       <label class="input-group-text" for="inputGroupSelect01">Role</label>
     </div>
-    <%= f.select :role, User.roles.map { |k, v| [k, v] }, class: "custom-select" %>
+    <%= f.select :role, user_roles, class: "custom-select" %>
   </div>
   <div class="form-group mb-3 row">
     <%= f.label :password, class: "col-sm-2 col-form-label" %>
