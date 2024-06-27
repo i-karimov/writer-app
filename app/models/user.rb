@@ -9,7 +9,8 @@ class User < ApplicationRecord
   validate :password_presence
 
   belongs_to :region, opttional: true
-
+  has_many :posts
+  
   private
 
   def password_complexity
