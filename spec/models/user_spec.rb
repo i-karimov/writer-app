@@ -16,8 +16,14 @@ end
 #  password_digest :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  region_id       :bigint           not null
 #
 # Indexes
 #
-#  index_users_on_email  (email) UNIQUE
+#  index_users_on_email      (email) UNIQUE
+#  index_users_on_region_id  (region_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (region_id => regions.id)
 #

@@ -2,6 +2,7 @@ class Region < ApplicationRecord
   validates :name, presence: true
 
   has_many :post
+  has_many :users
 end
 
 # == Schema Information
