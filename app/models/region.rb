@@ -2,7 +2,7 @@ class Region < ApplicationRecord
   validates :name, presence: true
 
   has_many :users
-  has_many :post, through: :users
+  has_many :posts
 
   def self.ransackable_attributes(_auth_object = nil)
     ['name']

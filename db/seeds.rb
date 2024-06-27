@@ -91,6 +91,6 @@ region_names = [
 regions = region_names.map { |name| { name: } }
 Region.upsert_all(regions)
 
-FactoryBot.create(:user, first_name: 'admin', email: 'admin@admin.com')
+FactoryBot.create(:user, role: :admin, first_name: 'admin', email: 'admin@admin.com')
 
 FactoryBot.create_list(:user, 40, :with_posts)

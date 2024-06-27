@@ -10,8 +10,12 @@ FactoryBot.define do
 
     trait :with_posts do
       after(:create) do |user|
-        user.posts << build_list(:post, 5, user:, region: user.region)
+        create_list(:post, 5, user:, region: user.region)
       end
+    end
+
+    trait :admin_user do
+      role { :admin }
     end
   end
 end
@@ -25,6 +29,7 @@ end
 #  last_name       :string
 #  middle_name     :string
 #  password_digest :string
+#  role            :integer          default(0), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  region_id       :bigint
@@ -33,6 +38,7 @@ end
 #
 #  index_users_on_email      (email) UNIQUE
 #  index_users_on_region_id  (region_id)
+#  index_users_on_role       (role)
 #
 # Foreign Keys
 #

@@ -11,6 +11,8 @@ class User < ApplicationRecord
   belongs_to :region, optional: true
   has_many :posts
 
+  enum role: { regular: 0, admin: 1 }, _suffix: :role
+
   private
 
   def password_complexity
@@ -37,6 +39,7 @@ end
 #  last_name       :string
 #  middle_name     :string
 #  password_digest :string
+#  role            :integer          default(0), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  region_id       :bigint
@@ -45,6 +48,7 @@ end
 #
 #  index_users_on_email      (email) UNIQUE
 #  index_users_on_region_id  (region_id)
+#  index_users_on_role       (role)
 #
 # Foreign Keys
 #
