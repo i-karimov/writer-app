@@ -5,7 +5,7 @@ module Authentication
     private
 
     def current_user
-      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id].present?
+      @current_user = User.find_by(id: session[:user_id]) if session[:user_id].present?
     end
 
     def user_signed_in?
@@ -22,14 +22,14 @@ module Authentication
 
     def ensure_unsigned_in
       return unless user_signed_in?
-  
+
       flash[:warning] = 'You are signed in'
       redirect_to posts_path
     end
-  
+
     def require_authentication
       return if user_signed_in?
-  
+
       flash[:warning] = 'You are not signed in yet'
       redirect_to new_session_path
     end

@@ -41,9 +41,13 @@ gem 'bootsnap', require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem 'aasm'
 gem 'bullet'
+gem 'caxlsx'
+gem 'caxlsx_rails'
+gem 'draper'
 gem 'image_processing', '~> 1.2'
 gem 'kaminari'
 gem 'ransack'
+gem 'rubyzip'
 gem 'valid_email2'
 
 group :development, :test do
