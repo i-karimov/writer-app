@@ -45,20 +45,14 @@ class PostsController < ApplicationController
   end
 
   def update
-    Post.transaction do
-      raise ActiveRecord::Rollback unless @post.update(post_params.except(:images, :files))
-
-      @post.images.attach(post_params[:images]) unless @post.images.attached?
-      @post.files.attach(post_params[:files]) unless @post.files.attached?
+    form = PostForm.new(post: @post, params: post_params)
+    if form.update
       flash[:success] = 'Post updated successfully'
       redirect_to posts_path
+    else
+      flash[:danger] = form.errors.full_messages.join(', ')
+      redirect_to edit_post_path(@post)
     end
-  rescue ActiveRecord::StaleObjectError
-    flash[:danger] = 'Post was updated by another user. Please refresh the page and try again.'
-    redirect_to edit_post_path(@post)
-  rescue ActiveRecord::Rollback
-    flash[:danger] = 'Update transaction failed'
-    redirect_to edit_post_path(@post)
   end
 
   def show; end
