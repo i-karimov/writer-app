@@ -2,6 +2,8 @@ module Admin
   class UsersController < ApplicationController
     before_action :require_authentication
     before_action :set_user!, only: %i[edit update destroy]
+    before_action :authorize_user!
+    after_action :verify_authorized
 
     def new
       @user = User.new
@@ -41,12 +43,8 @@ module Admin
     end
 
     def destroy
-      if current_user == @user
-        flash[:warning] = "As an admin, you can't delete you account."
-      else
-        @user.destroy
-        flash[:success] = 'User was successfully deleted.'
-      end
+      @user.destroy
+      flash[:success] = 'User was successfully deleted.'
 
       redirect_to admin_users_path
     end
@@ -86,6 +84,11 @@ module Admin
         :region_id,
         :role
       )
+    end
+
+    def authorize_user!
+      puts '*' * 200
+      authorize [:admin, (@user || User)]
     end
   end
 end

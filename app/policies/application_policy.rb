@@ -9,7 +9,7 @@ class ApplicationPolicy
   end
 
   def index?
-    false
+    user.admin_role?
   end
 
   def show?

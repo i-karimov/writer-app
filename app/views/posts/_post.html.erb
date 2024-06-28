@@ -1,7 +1,7 @@
-<tr>
-  <th scope="row" class="text-muted"> <%= post.id %></th>
+<tr class=<%= authored_as_admin_by?(current_user, post) ? 'table-info' : '' %> >
+  <th scope="row" class="text-muted "> <%= post.id %></th>
   <td> <%= post.title %> </td>
-  <td> <%= post.user.short_name %> </td>
+  <td> <%= authored_as_admin_by?(current_user, post) ? 'You' : post.user.short_name %> </td>
   <td> <%= post.images.size %> </td>
   <td> <%= post.files.size %> </td>
   <td> <%= post.region.name %> </td>

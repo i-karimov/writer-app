@@ -7,5 +7,9 @@ module Admin
         [role.titleize, role]
       end
     end
+
+    def authored_as_admin_by?(current_user, post)
+      post.authored_by?(current_user) && current_user.admin_role?
+    end
   end
 end

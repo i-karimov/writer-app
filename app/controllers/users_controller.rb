@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :ensure_unsigned_in, only: %i[new create]
   before_action :require_authentication, only: %i[edit update]
   before_action :set_user!, only: %i[edit update]
+  before_action :authorize_user!
+  after_action :verify_authorized
 
   def new
     @user = User.new(role: :regular)
@@ -33,10 +35,14 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :first_name, :middle_name, :last_name, :password, :password_confirmation)
+    params.require(:user).permit(:email, :first_name, :middle_name, :last_name, :region_id, :password, :password_confirmation)
   end
 
   def set_user!
     @user = User.find(params[:id])
+  end
+
+  def authorize_user!
+    authorize(@user || User)
   end
 end

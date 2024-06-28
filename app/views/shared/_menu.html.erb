@@ -15,6 +15,10 @@
             <li><%= nav_tab 'Log out', session_path,
           class: 'nav-link px-2', current_page: current_page, method: :delete %></li>
             <li><%= link_to 'Edit profile', edit_user_path(current_user), class: 'nav-link px-2' %></li>
+            <% if policy([:admin, :user]).index? %>
+              <li><%= nav_tab 'Users', admin_users_path,
+              class: 'nav-link px-2', current_page: current_page %></li>
+            <% end %>
           <% else %>
             <li><%= nav_tab 'Sign up', new_user_path,
               class: 'nav-link px-2', current_page: current_page %></li>

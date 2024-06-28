@@ -3,8 +3,10 @@ region_names = ['Москва', 'Санкт-Петербург', 'Московс
 regions = region_names.map { |name| { name: } }
 Region.upsert_all(regions)
 
-admin = FactoryBot.create(:user, :admin, first_name: 'admin', email: 'admin@admin.com')
+admin = FactoryBot.create(:user, :admin, first_name: 'admin')
 admin.password = 'admin'
+admin.email = 'admin@admin.com'
+
 admin.save(validate: false)
 
 FactoryBot.create_list(:user, 20, :with_posts).each do |user|
