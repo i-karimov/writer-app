@@ -24,8 +24,13 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build post_params
+    
     @post.region = current_user.region if current_user.regular_role?
-    @post.status = :approved if current_user.admin_role?
+    
+    if current_user.admin_role?
+      @post.status = :approved
+      @post.published_at = Time.current
+    end
 
     if @post.save
       flash[:success] = 'Post created successfully'

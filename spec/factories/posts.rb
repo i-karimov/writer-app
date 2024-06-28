@@ -11,14 +11,15 @@ end
 #
 # Table name: posts
 #
-#  id         :bigint           not null, primary key
-#  content    :text             not null
-#  status     :string           not null
-#  title      :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  region_id  :bigint           not null
-#  user_id    :bigint           not null
+#  id           :bigint           not null, primary key
+#  content      :text             not null
+#  published_at :datetime
+#  status       :string           not null
+#  title        :string           not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  region_id    :bigint           not null
+#  user_id      :bigint           not null
 #
 # Indexes
 #

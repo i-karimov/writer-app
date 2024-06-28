@@ -23,7 +23,7 @@ class ExportPostsService < ApplicationService
       Post.where(id: post_ids).find_each do |post|
         zos.put_next_entry "post_#{post.id}.xlsx"
         zos.print renderer.render_to_string(
-          layout: false, handlers: [:axlsx], formats: [:xlsx], template: 'posts/post', locals: { post: }
+          layout: false, handlers: [:axlsx], formats: [:xlsx], template: 'posts/post', locals: { post: post.decorate }
         )
       end
     end

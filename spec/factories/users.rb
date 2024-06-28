@@ -32,7 +32,7 @@ end
 #  last_name       :string
 #  middle_name     :string
 #  password_digest :string
-#  role            :integer          default(0), not null
+#  role            :integer          default("regular"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  region_id       :bigint

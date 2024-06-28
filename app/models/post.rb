@@ -25,7 +25,12 @@ class Post < ApplicationRecord
     end
 
     event :approve do
-      transitions from: :on_moderation, to: :approved
+      transitions from: :on_moderation, to: :approved do
+        after do
+          self.published_at = Time.current
+          save
+        end
+      end
     end
 
     event :reject do
@@ -56,14 +61,15 @@ end
 #
 # Table name: posts
 #
-#  id         :bigint           not null, primary key
-#  content    :text             not null
-#  status     :string           not null
-#  title      :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  region_id  :bigint           not null
-#  user_id    :bigint           not null
+#  id           :bigint           not null, primary key
+#  content      :text             not null
+#  published_at :datetime
+#  status       :string           not null
+#  title        :string           not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  region_id    :bigint           not null
+#  user_id      :bigint           not null
 #
 # Indexes
 #

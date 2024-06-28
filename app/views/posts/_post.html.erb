@@ -2,8 +2,12 @@
   <th scope="row" class="text-muted "> <%= post.id %></th>
   <td> <%= post.title %> </td>
   <td> <%= authored_as_admin_by?(current_user, post) ? 'You' : post.user.short_name %> </td>
-  <td> <%= post.images.size %> </td>
-  <td> <%= post.files.size %> </td>
+  <td class="text-nowrap">
+    <i class="bi bi-images"><%= post.images.size %></i>
+    <i class="bi bi-dot"></i>
+    <i class="bi bi-paperclip"><%= post.files.size %></i>
+  </td>
+  <td> <%= post.published_at_formatted %> </td>
   <td> <%= post.region.name %> </td>
   <td> <%= content_tag :span, post.status, class: status_badge_class(post.status) %> </td>
   <td>
@@ -12,10 +16,10 @@
         <%= link_to 'Edit', edit_post_path(post), class: "btn btn-outline-secondary" %>
       <% end %>
       <% if policy(post).show? %>
-      <%= link_to 'Show', post_path(post), class: "btn btn-outline-secondary" %>
+        <%= link_to 'Show', post_path(post), class: "btn btn-outline-secondary" %>
       <% end %>
       <% if policy(post).destroy? %>
-      <%= link_to 'Delete', post_path(post), class: "btn btn-outline-secondary", data: { method: :delete, confirm: 'Are you sure?' } %>
+        <%= link_to 'Delete', post_path(post), class: "btn btn-outline-secondary", data: { method: :delete, confirm: 'Are you sure?' } %>
       <% end %>
     </div>
   </td>
