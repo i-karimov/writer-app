@@ -48,6 +48,9 @@ gem 'image_processing', '~> 1.2'
 gem 'kaminari'
 gem 'pundit'
 gem 'ransack'
+gem 'rubocop', require: false
+gem 'rubocop-rails', require: false
+gem 'rubocop-rspec', require: false
 gem 'rubyzip'
 gem 'sidekiq'
 gem 'valid_email2'
