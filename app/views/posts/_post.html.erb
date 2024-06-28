@@ -7,7 +7,7 @@
     <i class="bi bi-dot"></i>
     <i class="bi bi-paperclip text-secondary"><%= post.files.size %></i>
   </td>
-  <td class="text-center"> <%= post.published_at_formatted %> </td>
+  <td class="text-center small"> <%= post.published_at_formatted %> </td>
   <td> <%= post.region.name %> </td>
   <td> <%= content_tag :span, post.status, class: status_badge_class(post.status) %> </td>
   <td>
