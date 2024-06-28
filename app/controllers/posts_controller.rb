@@ -6,7 +6,7 @@ class PostsController < ApplicationController
 
   def index
     @q = Post.ransack(params[:q])
-    @posts = policy_scope(@q.result.includes(:region)).page(params[:page])
+    @posts = policy_scope(@q.result.includes([:region, :user])).page(params[:page])
 
     respond_to do |format|
       format.html {}
