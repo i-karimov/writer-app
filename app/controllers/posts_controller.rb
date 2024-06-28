@@ -7,6 +7,15 @@ class PostsController < ApplicationController
   def index
     @q = Post.ransack(params[:q])
     @posts = policy_scope(@q.result.includes(:region)).page(params[:page])
+
+    respond_to do |format|
+      format.html {}
+
+      format.zip do
+        compressed_filestream = ExportPostsService.call(@posts.pluck(:id))
+        send_data compressed_filestream.read, filename: 'posts.zip'
+      end
+    end
   end
 
   def new

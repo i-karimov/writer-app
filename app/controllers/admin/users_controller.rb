@@ -21,14 +21,8 @@ module Admin
     end
 
     def index
-      respond_to do |format|
-        format.html do
-          @q = User.ransack(params[:search])
-          @users = @q.result.includes([:region]).page(params[:page])
-        end
-
-        # format.zip { respond_with_zipped_users }
-      end
+      @q = User.ransack(params[:search])
+      @users = @q.result.includes([:region]).page(params[:page])
     end
 
     def edit; end
@@ -51,24 +45,6 @@ module Admin
 
     private
 
-    #   def respond_with_zipped_users
-    #     compressed_filestream = Zip::OutputStream.write_buffer do |zos|
-    #       User.find_each do |user|
-    #         zos.put_next_entry "user_#{user.id}.xlsx"
-    #         zos.print render_to_string(
-    #           layout: false,
-    #           handlers: [:axlsx],
-    #           formats: [:xlsx],
-    #           locals: { user: }
-    #         )
-    #       end
-    #     end
-
-    #     compressed_filestream.rewind
-    #     send_data compressed_filestream.read, filename: 'users.zip'
-    #   end
-    # end
-
     def set_user!
       @user = User.find(params[:id])
     end
@@ -87,8 +63,7 @@ module Admin
     end
 
     def authorize_user!
-      puts '*' * 200
-      authorize [:admin, (@user || User)]
+      authorize [:admin, @user || User]
     end
   end
 end
