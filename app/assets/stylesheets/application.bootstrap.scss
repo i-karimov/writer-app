@@ -10,3 +10,9 @@
     color: $red;
   }
 }
+
+
+.bi-images::before {
+  content: "\f42b";
+  margin-right: 4px;
+}
