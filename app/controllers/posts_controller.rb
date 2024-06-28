@@ -6,15 +6,7 @@ class PostsController < ApplicationController
 
   def index
     @q = Post.ransack(params[:q])
-    @posts = @q.result.includes([:region])
-
-    @posts = if current_user.admin_role?
-               @posts.where(status: :draft).or(Post.where(user_id: current_user.id))
-             else
-               @posts.where(user: current_user)
-             end
-
-    @posts = @posts.page(params[:page])
+    @posts = policy_scope @q.result.includes([:region]).page(params[:page])
   end
 
   def new
