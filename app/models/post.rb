@@ -11,7 +11,10 @@ class Post < ApplicationRecord
   belongs_to :region
   belongs_to :user
 
-  has_many_attached :images
+  has_many_attached :images do |image|
+    image.variant :thumb, resize_to_limit: [250, 250], preprocessed: true
+  end
+
   has_many_attached :files
 
   aasm(column: :status) do

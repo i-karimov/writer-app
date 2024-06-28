@@ -1,9 +1,11 @@
 <% if object.images.any? %>
-  <% object.images.each do |image| %>
-    <div class="col">
-      <%=  image_tag(image, width: '200px', class: "img-thumbnail rounded") %>
+  <div class="container">
+    <div class="flex-container justify-content-center flex-md-wrap">
+      <% object.images.each do |image| %>
+        <%= link_to image_tag(image.variant(:thumb), width: '250px'), url_for(image), class: "img-thumbnail rounded", target: '_blank' %>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 <% else %>
   <div class="row text-center text-muted ">
     <p>No images</p>
