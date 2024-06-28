@@ -2,7 +2,7 @@
   <th scope="row" class="text-muted"> <%= user.id %></th>
   <td> <%= user.full_name %> </td>
   <td> <%= user.email %> </td>
-  <td> <%= user.region.name %> </td>
+  <td> <%= user.region&.name %> </td>
   <td> <%= user.role %> </td>
   <td> <%= user.registration_date %> </td>
   <td>

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[new create edit update]
 
   namespace :admin do
-    resources :users, only: %i[index edit update destroy]
+    resources :users
   end
 
   resources :posts

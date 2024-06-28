@@ -18,13 +18,13 @@
   </div>
   <div class="input-group mb-3">
     <div class="input-group-prepend">
-      <label class="input-group-text" for="inputGroupSelect01">Region</label>
+      <label class="input-group-text">Region</label>
     </div>
-    <%= f.select :region_id, Region.pluck(:name, :id), class: "custom-select" %>
+    <%= f.select :region_id, Region.pluck(:name, :id), include_blank: true, class: "custom-select" %>
   </div>
   <div class="input-group mb-3">
     <div class="input-group-prepend">
-      <label class="input-group-text" for="inputGroupSelect01">Role</label>
+      <label class="input-group-text">Role</label>
     </div>
     <%= f.select :role, user_roles, class: "custom-select" %>
   </div>

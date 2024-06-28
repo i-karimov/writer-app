@@ -3,6 +3,21 @@ module Admin
     before_action :require_authentication
     before_action :set_user!, only: %i[edit update destroy]
 
+    def new
+      @user = User.new
+    end
+
+    def create
+      @user = User.new(user_params)
+
+      if @user.save
+        flash[:success] = 'User was successfully created.'
+        redirect_to admin_users_path
+      else
+        render :new
+      end
+    end
+
     def index
       respond_to do |format|
         format.html do

@@ -1,8 +1,20 @@
 class PostsController < ApplicationController
-  before_action :load_post!, only: %i[show edit update destroy]
+  before_action :set_post!, only: %i[show edit update destroy]
+  before_action :require_authentication
+  before_action :authorize_post!
+  after_action :verify_authorized
+
   def index
     @q = Post.ransack(params[:q])
-    @posts = @q.result.includes([:region]).page(params[:page])
+    @posts = @q.result.includes([:region])
+
+    @posts = if current_user.admin_role?
+               @posts.where(status: :draft).or(Post.where(user_id: current_user.id))
+             else
+               @posts.where(user: current_user)
+             end
+
+    @posts = @posts.page(params[:page])
   end
 
   def new
@@ -11,6 +23,8 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build post_params
+    @post.region = current_user.region if current_user.regular_role?
+    @post.status = :approved if current_user.admin_role?
 
     if @post.save
       flash[:success] = 'Post created successfully'
@@ -30,7 +44,7 @@ class PostsController < ApplicationController
       @post.files.attach(post_params[:files]) unless @post.files.attached?
 
       flash[:success] = 'Post updated successfully'
-      render :show
+      redirect_to posts_path
     else
       render :edit
     end
@@ -52,7 +66,11 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :content, :status, :region_id, images: [], files: [])
   end
 
-  def load_post!
+  def set_post!
     @post = Post.find(params[:id])
+  end
+
+  def authorize_post!
+    authorize(@post || Post)
   end
 end

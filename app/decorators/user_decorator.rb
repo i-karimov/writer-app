@@ -7,6 +7,10 @@ class UserDecorator < Draper::Decorator
     name.join(' ')
   end
 
+  def short_name
+    [object.first_name[0], object.last_name].join('. ')
+  end
+
   def registration_date
     object.created_at.strftime('%A, %B %e')
   end

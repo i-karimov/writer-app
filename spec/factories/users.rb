@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :user do
-    email { FFaker::Internet.unique.email }
     first_name { FFaker::Name.unique.first_name }
     last_name { FFaker::Name.unique.last_name }
     middle_name { FFaker::Lorem.unique.word }
@@ -8,9 +7,13 @@ FactoryBot.define do
     password_confirmation { '#13R1fr:wx,E' }
     association :region
 
+    before(:create) do |user|
+      user.email = "#{user.first_name}.#{user.last_name}@mail.com".downcase
+    end
+
     trait :with_posts do
       after(:create) do |user|
-        create_list(:post, 5, user:, region: user.region)
+        create_list(:post, 2, user:, region: user.region)
       end
     end
 

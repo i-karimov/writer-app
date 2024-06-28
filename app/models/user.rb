@@ -5,15 +5,20 @@ class User < ApplicationRecord
 
   validates :email, presence: true, 'valid_email2/email': true
   validates :email, uniqueness: true
+  validates :region_id, presence: true, unless: proc { |user| user.admin_role? }
 
   validates :first_name, presence: true
-  validate :password_complexity
+  # validate :password_complexity
   validate :password_presence
 
   belongs_to :region, optional: true
   has_many :posts
 
   enum role: { regular: 0, admin: 1 }, _suffix: :role
+
+  def author?(obj)
+    obj.user == self
+  end
 
   private
 

@@ -1,8 +1,9 @@
 class Post < ApplicationRecord
   include AASM
+  include Authorship
 
   default_scope { order(created_at: :desc) }
-  
+
   validates :title, :content, :status, presence: true
 
   validate :attachments_extension
@@ -36,10 +37,10 @@ class Post < ApplicationRecord
     Arel.sql('date(created_at)')
   end
 
-  def attachments_extension
+  def attachments_extension # TODO: validate to ensure no images in file attachments
     return if images.all? { |img| img.content_type =~ /^image/ }
 
-    errors.add(:images, 'should have correct extension')
+    errors.add(:images, 'should have elligable extension')
   end
 
   def self.ransackable_attributes(_auth_object = nil)
