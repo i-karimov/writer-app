@@ -2,6 +2,8 @@ class Post < ApplicationRecord
   include AASM
   include Authorship
 
+  self.locking_column = :lock_version
+  
   default_scope { order(created_at: :desc) }
 
   validates :title, :content, :status, presence: true
@@ -66,6 +68,7 @@ end
 #
 #  id           :bigint           not null, primary key
 #  content      :text             not null
+#  lock_version :integer
 #  published_at :datetime
 #  status       :string           not null
 #  title        :string           not null

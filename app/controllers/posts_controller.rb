@@ -6,14 +6,14 @@ class PostsController < ApplicationController
 
   def index
     @q = Post.ransack(params[:q])
-    @posts = policy_scope(@q.result.includes([:region, :user])).page(params[:page])
+    @posts = policy_scope(@q.result.includes(%i[region user])).page(params[:page])
 
     respond_to do |format|
       format.html {}
 
       format.zip do
         compressed_filestream = ExportPostsService.call(@posts.pluck(:id))
-        send_data compressed_filestream.read, filename: 'posts.zip' 
+        send_data compressed_filestream.read, filename: 'posts.zip'
       end
     end
   end
@@ -24,9 +24,9 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build post_params
-    
+
     @post.region = current_user.region if current_user.regular_role?
-    
+
     if current_user.admin_role?
       @post.status = :approved
       @post.published_at = Time.current
@@ -54,6 +54,9 @@ class PostsController < ApplicationController
     else
       render :edit
     end
+  rescue ActiveRecord::StaleObjectError => e
+    flash[:danger] = 'Post was updated by another user. Please refresh the page and try again.'
+    redirect_to edit_post_path(@post)
   end
 
   def show; end
@@ -69,7 +72,15 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :status, :region_id, images: [], files: [])
+    params.require(:post).permit(
+      :title,
+      :content,
+      :status, # TODO: ensure if regular user wouldnt be able to pass :status
+      :lock_version,
+      :region_id,
+      images: [],
+      files: []
+    )
   end
 
   def set_post!

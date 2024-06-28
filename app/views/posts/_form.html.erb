@@ -32,5 +32,6 @@
     <%= f.label "Files (#{@post.files.size})", class: "col-sm-2 col-form-label" %>
     <%= f.file_field :files, multiple: true, class: 'form-control' %>
   </div>
+  <%= f.hidden_field :lock_version %>
   <%= f.submit 'Submit', class: 'btn btn-primary' %>
 <% end %>
