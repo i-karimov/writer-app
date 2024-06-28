@@ -49,6 +49,7 @@ gem 'kaminari'
 gem 'pundit'
 gem 'ransack'
 gem 'rubyzip'
+gem 'sidekiq'
 gem 'valid_email2'
 
 group :development, :test do
