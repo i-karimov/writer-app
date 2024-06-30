@@ -47,7 +47,6 @@ gem 'draper'
 gem 'image_processing', '~> 1.2'
 gem 'kaminari'
 gem 'pundit'
-gem 'rails-controller-testing'
 gem 'ransack'
 gem 'rubocop', require: false
 gem 'rubocop-performance', require: false
@@ -59,10 +58,12 @@ gem 'valid_email2'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'database_cleaner-active_record'
   gem 'debug', platforms: %i[mri windows]
   gem 'factory_bot_rails'
   gem 'ffaker'
   gem 'pry-rails'
+  gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 6.1.0'
 end
 
