@@ -47,6 +47,7 @@ gem 'draper'
 gem 'image_processing', '~> 1.2'
 gem 'kaminari'
 gem 'pundit'
+gem 'rails-controller-testing'
 gem 'ransack'
 gem 'rubocop', require: false
 gem 'rubocop-performance', require: false
