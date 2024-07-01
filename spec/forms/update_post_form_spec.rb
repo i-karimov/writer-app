@@ -3,7 +3,6 @@ RSpec.describe 'UpdatePostForm' do
   let(:params) { post.attributes.symbolize_keys.merge(status: 'on_moderation') }
   let(:form) { UpdatePostForm.new(post, params) }
 
-
   describe '#perform' do
     context 'when the form is valid' do
       it 'updates the post and attaches images and files' do

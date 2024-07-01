@@ -4,7 +4,7 @@ class UpdatePostStatusService
   rescue AASM::InvalidTransition => e
     Rails.logger.error("Invalid transition: #{e.message}")
     false
-  rescue => e
+  rescue StandardError => e
     Rails.logger.error("Error updating post status: #{e.message}")
     false
   end

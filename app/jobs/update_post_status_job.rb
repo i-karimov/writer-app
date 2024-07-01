@@ -6,7 +6,7 @@ class UpdatePostStatusJob < ApplicationJob
     post = Post.find(post_id)
     Rails.logger.info("Start updating status: #{post.status}, event: #{event}")
     UpdatePostStatusService.call(post, event)
-  rescue => e
+  rescue StandardError => e
     Rails.logger.error("Error updating post status in background job: #{e.message}")
   end
-end 
+end

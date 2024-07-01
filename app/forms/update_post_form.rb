@@ -27,7 +27,7 @@ class UpdatePostForm
   end
 
   def status_changed?
-    post.status != params[:status] 
+    post.status != params[:status]
   end
 
   def status_permitted_transition

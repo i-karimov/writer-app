@@ -50,7 +50,7 @@ class PostsController < ApplicationController
 
   #     @post.images.attach(params[:images]) unless post.images.attached?
   #     @post.files.attach(params[:files]) unless post.files.attached?
-        
+
   #     flash[:success] = 'Post updated successfully'
   #     redirect_to posts_path
   #   end
@@ -67,7 +67,7 @@ class PostsController < ApplicationController
     @form = UpdatePostForm.new(@post, post_params)
 
     if @form.perform
-      flash[:success] = "Post updated successfully"
+      flash[:success] = 'Post updated successfully'
       redirect_to posts_path
     else
       flash[:danger] = @form.errors.full_messages.join("\n")
