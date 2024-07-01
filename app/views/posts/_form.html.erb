@@ -9,19 +9,15 @@
     <%= f.text_area :content,  placeholder: 'Content', class: 'form-control col-sm-10', rows: 10 %>
   </div>
   <% if current_user.admin_role? %>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text" ">Region</label>
-      </div>
-      <%= f.select :region_id, Region.pluck(:name, :id), class: "custom-select" %>
+    <div class="form-group mb-3 row">
+      <%= f.label :region, class: "col-sm-2 col-form-label" %>
+      <%= f.select :region_id, Region.pluck(:name, :id), {}, class: "form-control" %>
     </div>
   <% end %>
   <% if current_user.admin_role? && params[:action] == 'edit' %>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text">Status</label>
-      </div>
-      <%= f.select :status, Post.aasm.states_for_select, class: "custom-select" %>
+    <div class="input-group mb-3 row">
+      <%= f.label :status, class: "col-sm-2 col-form-label" %>
+      <%= f.select :status, Post.aasm.states_for_select, {}, class: "form-control" %>
     </div>
   <% end %>
   <div class="form-group mb-3 row">
