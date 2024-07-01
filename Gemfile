@@ -18,10 +18,6 @@ gem 'puma', '>= 5.0'
 gem 'pundit'
 gem 'rails', '~> 7.1.3', '>= 7.1.3.4'
 gem 'ransack'
-gem 'rubocop', require: false
-gem 'rubocop-performance', require: false
-gem 'rubocop-rails', require: false
-gem 'rubocop-rspec', require: false
 gem 'rubyzip'
 gem 'sidekiq'
 gem 'sprockets-rails'
@@ -38,6 +34,10 @@ group :development, :test do
 end
 
 group :development do
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
   gem 'annotate'
   gem 'foreman'
   gem 'reek'
