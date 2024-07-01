@@ -20,14 +20,14 @@ class UpdatePostForm
       post.images.attach(params[:images]) unless post.images.attached?
       post.files.attach(params[:files]) unless post.files.attached?
 
-      UpdatePostStatusJob.perform_later(post.id, aasm_event) unless post.status == status
+      UpdatePostStatusJob.perform_later(post.id, aasm_event) if status_changed?
     end
     errors.merge!(post.errors)
     errors.empty?
   end
 
   def status_changed?
-    post.status != params[:status]
+    status.present? && post.status != params[:status]
   end
 
   def status_permitted_transition

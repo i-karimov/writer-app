@@ -8,7 +8,7 @@ class Post < ApplicationRecord
 
   validates :title, :content, :status, presence: true
 
-  validate :attachments_extension
+  validate :check_attachments_extension
 
   belongs_to :region
   belongs_to :user
@@ -47,7 +47,7 @@ class Post < ApplicationRecord
     Arel.sql('date(created_at)')
   end
 
-  def attachments_extension
+  def check_attachments_extension
     errors.add(:files, 'should have elligable extension') if files.any? { |file| file.content_type =~ /^image/ }
     errors.add(:images, 'should have elligable extension') unless images.all? { |img| img.content_type =~ /^image/ }
   end
