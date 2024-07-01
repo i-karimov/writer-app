@@ -45,6 +45,7 @@ class PostsController < ApplicationController
 
   def update
     form = PostForm.new(post: @post, params: post_params)
+    
     if form.update
       flash[:success] = 'Post updated successfully'
       redirect_to posts_path
@@ -69,7 +70,7 @@ class PostsController < ApplicationController
     params.require(:post).permit(
       :title,
       :content,
-      :status, # TODO: ensure if regular user wouldnt be able to pass :status
+      :status,
       :lock_version,
       :region_id,
       images: [],

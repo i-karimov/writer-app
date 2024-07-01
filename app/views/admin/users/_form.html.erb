@@ -16,17 +16,13 @@
     <%= f.label :last_name, class: "col-sm-2 col-form-label" %>
     <%= f.text_field :last_name, class: 'form-control form-control-lg' %>
   </div>
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <label class="input-group-text">Region</label>
-    </div>
-    <%= f.select :region_id, Region.pluck(:name, :id), include_blank: true, class: "custom-select" %>
+  <div class="form-group mb-3 row">
+    <%= f.label :region, class: "col-sm-2 col-form-label" %>
+    <%= f.select :region_id, Region.pluck(:name, :id), {}, class: "form-control" %>
   </div>
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <label class="input-group-text">Role</label>
-    </div>
-    <%= f.select :role, user_roles, class: "custom-select" %>
+  <div class="input-group mb-3 row">
+    <%= f.label :status, class: "col-sm-2 col-form-label" %>
+    <%= f.select :status, Post.aasm.states_for_select, {}, class: "form-control" %>
   </div>
   <div class="form-group mb-3 row">
     <%= f.label :password, class: "col-sm-2 col-form-label" %>

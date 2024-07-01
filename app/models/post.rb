@@ -47,10 +47,9 @@ class Post < ApplicationRecord
     Arel.sql('date(created_at)')
   end
 
-  def attachments_extension # TODO: validate to ensure no images in file attachments
-    return if images.all? { |img| img.content_type =~ /^image/ }
-
-    errors.add(:images, 'should have elligable extension')
+  def attachments_extension
+    errors.add(:files, 'should have elligable extension') if files.any? { |file| file.content_type =~ /^image/ }
+    errors.add(:images, 'should have elligable extension') unless images.all? { |img| img.content_type =~ /^image/ }
   end
 
   def self.ransackable_attributes(_auth_object = nil)
