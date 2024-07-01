@@ -1,20 +1,26 @@
-FROM ruby:3.3.0
+FROM ruby:3.3.0-alpine
 
-WORKDIR /app
+ARG PACKAGES="vim openssl-dev postgresql-dev imagemagick build-base vips-dev curl libstdc++ yarn nodejs less tzdata git postgresql-client bash screen gcompat su-exec sudo"
+ARG RAILS_ROOT=/rails_app
 
-RUN apt-get update && apt-get install -y \
-    nodejs libvips postgresql build-essential curl \
-    git libpq-dev node-gyp pkg-config
+RUN apk update \
+    && apk upgrade \
+    && apk add --update --no-cache $PACKAGES
 
-RUN gem install bundler 
+RUN mkdir $RAILS_ROOT
+WORKDIR $RAILS_ROOT
 
-COPY Gemfile Gemfile.lock ./
+RUN gem install bundler:2.3.7
 
-RUN bundle install
+COPY Gemfile Gemfile.lock  ./
+RUN bundle install --jobs 5
 
-COPY . .
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
+
+ADD . $RAILS_ROOT
+ENV PATH=$RAILS_ROOT/bin:${PATH}
 
 EXPOSE 3000
 
-CMD ["/bin/rails", "server"]
-
+CMD ["rails", "server", "-b", "0.0.0.0"]
