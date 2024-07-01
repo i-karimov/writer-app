@@ -1,4 +1,6 @@
 class Region < ApplicationRecord
+  default_scope { order(name: :asc) }
+
   validates :name, presence: true
 
   has_many :users

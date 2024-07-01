@@ -43,26 +43,6 @@ class PostsController < ApplicationController
     @regions = Region.all
   end
 
-  # def update
-
-  #   Post.transaction do
-  #     raise ActiveRecord::Rollback unless @post.update(params.except(:images, :files))
-
-  #     @post.images.attach(params[:images]) unless post.images.attached?
-  #     @post.files.attach(params[:files]) unless post.files.attached?
-
-  #     flash[:success] = 'Post updated successfully'
-  #     redirect_to posts_path
-  #   end
-
-  # rescue ActiveRecord::StaleObjectError
-  #   flash[:danger] = 'Post was updated by another user. Please refresh the page and try again.'
-  #   redirect_to edit_post_path(@post)
-  # rescue ActiveRecord::Rollback
-  #   flash[:danger] = @post.errors.full_messages.join(', ')
-  #   redirect_to edit_post_path(@post)
-  # end
-
   def update
     @form = UpdatePostForm.new(@post, post_params)
 

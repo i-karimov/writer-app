@@ -34,6 +34,18 @@ class User < ApplicationRecord
   def password_presence
     errors.add(:password, :blank) if password_digest.blank?
   end
+
+  ransacker :full_name do |parent|
+    Arel::Nodes::NamedFunction.new('CONCAT_WS', [ Arel::Nodes.build_quoted(' '), parent.table[:first_name], parent.table[:last_name] ])
+  end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[first_name middle_name last_name]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["posts", "region"]
+  end
 end
 
 # == Schema Information
