@@ -11,6 +11,10 @@ FactoryBot.define do
       user.email = "#{user.first_name}.#{user.last_name}@mail.com".downcase
     end
 
+    before(:build) do |user|
+      user.email = "#{user.first_name}.#{user.last_name}@mail.com".downcase
+    end
+
     trait :with_posts do
       after(:create) do |user|
         create_list(:post, 2, user:, region: user.region)
