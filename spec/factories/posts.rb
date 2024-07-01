@@ -4,6 +4,10 @@ FactoryBot.define do
     content { FFaker::Lorem.paragraphs(5).join }
     association :user
     association :region
+
+    after(:create) do |post|
+      post.images.attach(io: File.open("#{Rails.root}/spec/fixtures/singer.jpg"), filename: 'singer.jpg', content_type: 'image/jpg')
+    end
   end
 end
 
