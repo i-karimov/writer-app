@@ -1,6 +1,12 @@
 FactoryBot.define do
   factory :region do
     name { FFaker::AddressRU.city }
+
+    trait :with_users do
+      after(:create) do |region|
+        create_list(:user, 2, :with_posts, region:)
+      end
+    end
   end
 end
 
