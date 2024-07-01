@@ -1,0 +1,12 @@
+class UpdatePostStatusService
+  def self.call(post, event)
+    post.aasm.fire(event)
+    post.save!
+  rescue AASM::InvalidTransition => e
+    Rails.logger.error("Invalid transition: #{e.message}")
+    false
+  rescue => e
+    Rails.logger.error("Error updating post status: #{e.message}")
+    false
+  end
+end

@@ -12,7 +12,7 @@ class PostsController < ApplicationController
       format.html {}
 
       format.zip do
-        send_data compressed_filestream.read, filename: 'posts.zip'
+        send_data ExportPostsService.call(@posts.pluck(:id)).read, filename: 'posts.zip'
       end
     end
   end
@@ -43,15 +43,35 @@ class PostsController < ApplicationController
     @regions = Region.all
   end
 
+  # def update
+
+  #   Post.transaction do
+  #     raise ActiveRecord::Rollback unless @post.update(params.except(:images, :files))
+
+  #     @post.images.attach(params[:images]) unless post.images.attached?
+  #     @post.files.attach(params[:files]) unless post.files.attached?
+        
+  #     flash[:success] = 'Post updated successfully'
+  #     redirect_to posts_path
+  #   end
+
+  # rescue ActiveRecord::StaleObjectError
+  #   flash[:danger] = 'Post was updated by another user. Please refresh the page and try again.'
+  #   redirect_to edit_post_path(@post)
+  # rescue ActiveRecord::Rollback
+  #   flash[:danger] = @post.errors.full_messages.join(', ')
+  #   redirect_to edit_post_path(@post)
+  # end
+
   def update
-    form = PostForm.new(post: @post, params: post_params)
-    
-    if form.update
-      flash[:success] = 'Post updated successfully'
+    @form = UpdatePostForm.new(@post, post_params)
+
+    if @form.perform
+      flash[:success] = "Post updated successfully"
       redirect_to posts_path
     else
-      flash[:danger] = form.errors.full_messages.join(', ')
-      redirect_to edit_post_path(@post)
+      flash[:danger] = @form.errors.full_messages.join("\n")
+      redirect_to posts_path
     end
   end
 

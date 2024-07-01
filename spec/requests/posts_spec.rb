@@ -76,11 +76,12 @@ RSpec.describe 'Posts', type: :request do
 
   describe 'PATCH /posts/:id' do
     context 'with valid data' do
-      let(:valid_params) { { post: { title: 'Updated Title' } } }
+      let(:valid_params) { { post: { title: 'Updated Title', content: 'New content', status: 'on_moderation' } } }
 
       it 'updates the post' do
         patch post_path(the_post), params: valid_params
         expect(the_post.reload.title).to eq('Updated Title')
+        expect(the_post.reload.content).to eq('New content')
       end
 
       it 'redirects to the posts path' do
@@ -99,7 +100,7 @@ RSpec.describe 'Posts', type: :request do
 
       it 'renders the edit template' do
         patch post_path(the_post), params: invalid_params
-        expect(response).to redirect_to(edit_post_path(the_post))
+        expect(response).to redirect_to(posts_path)
       end
     end
   end

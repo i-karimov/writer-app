@@ -29,7 +29,6 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 gem 'valid_email2'
 
 group :development, :test do
-  gem 'database_cleaner-active_record'
   gem 'debug', platforms: %i[mri windows]
   gem 'factory_bot_rails'
   gem 'ffaker'
