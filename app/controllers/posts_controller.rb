@@ -53,6 +53,9 @@ class PostsController < ApplicationController
       flash[:danger] = @form.errors.full_messages.join("\n")
       redirect_to posts_path
     end
+  rescue ActiveRecord::StaleObjectError
+    flash[:danger] = 'This post has been updated by another user. Please refresh the page and try again.'
+    redirect_to post_path(@post)
   end
 
   def show; end
