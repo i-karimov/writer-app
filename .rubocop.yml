@@ -1,8 +1,9 @@
-require:
-  - rubocop-rails
-  - rubocop-rspec
-  - rubocop-performance
-
+# require:
+#   - rubocop-rails
+#   - rubocop-rspec
+#   - rubocop-performance
+#   - rubocop-factory_bot
+#   - rubocop-rspec_rails
 inherit_from: .rubocop_todo.yml
 
 AllCops:
@@ -72,6 +73,7 @@ AllCops:
     - 'tmp/**/*'
     - 'vendor/**/*'
     - '.git/**/*'
+    - 'bin/bundle'
   # Default formatter will be used if no `-f/--format` option is given.
   DefaultFormatter: progress
   # Cop names are displayed in offense messages by default. Change behavior
