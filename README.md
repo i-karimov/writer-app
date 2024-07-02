@@ -32,9 +32,9 @@ docker-compose run bundle exec rspec
 ```
 
 ## Войти как админ:
-Email: `amin@admin.com` \
-Password: `admin`
+Email: `admin@admin.com` \
+Пароль: `admin`
 
-## Войти как базовый юзер:
+## Пароль базовых юзеров:
 
 Пароль: `#13R1fr:wx,E`
