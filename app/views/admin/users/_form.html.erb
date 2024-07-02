@@ -18,7 +18,11 @@
   </div>
   <div class="form-group mb-3 row">
     <%= f.label :region, class: "col-sm-2 col-form-label" %>
-    <%= f.select :region_id, Region.pluck(:name, :id), {}, class: "form-control" %>
+    <%= f.select :region_id, Region.pluck(:name, :id), {}, class: "form-control form-control-lg" %>
+  </div>
+  <div class="form-group mb-3 row">
+    <%= f.label :role, class: "col-sm-2 col-form-label" %>
+    <%= f.select :role, user_roles, {}, class: "form-control form-control-lg" %>
   </div>
   <div class="form-group mb-3 row">
     <%= f.label :password, class: "col-sm-2 col-form-label" %>
