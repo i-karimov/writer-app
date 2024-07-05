@@ -18,7 +18,8 @@ RUN bundle install --jobs 5
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
-ADD . $RAILS_ROOT
+COPY . .
+
 ENV PATH=$RAILS_ROOT/bin:${PATH}
 
 EXPOSE 3000
