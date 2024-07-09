@@ -8,16 +8,10 @@ class Post < ApplicationRecord
 
   validates :title, :content, :status, presence: true
 
-  validate :check_attachments_extension
-
   belongs_to :region
   belongs_to :user
 
-  has_many_attached :images do |image|
-    image.variant :thumb, resize_to_limit: [250, 250], preprocessed: true
-  end
-
-  has_many_attached :files
+  has_many_attached :attachments, dependent: :destroy
 
   aasm(column: :status) do
     state :draft, initial: true
@@ -45,11 +39,6 @@ class Post < ApplicationRecord
 
   ransacker :created_at do
     Arel.sql('date(created_at)')
-  end
-
-  def check_attachments_extension
-    errors.add(:files, 'should have elligable extension') if files.any? { |file| file.content_type =~ /^image/ }
-    errors.add(:images, 'should have elligable extension') unless images.all? { |img| img.content_type =~ /^image/ }
   end
 
   def self.ransackable_attributes(_auth_object = nil)

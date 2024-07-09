@@ -6,13 +6,16 @@ class PostsController < ApplicationController
 
   def index
     @q = Post.ransack(params[:q])
-    @posts = policy_scope(@q.result.includes(%i[region user])).page(params[:page])
+    @posts = policy_scope(@q.result.includes([:region, :user, { attachments_attachments: :blob }])).page(params[:page])
 
     respond_to do |format|
       format.html {}
 
       format.zip do
-        send_data ExportPostsService.run(post_ids: @posts.pluck(:id)).compressed_filestream.read, filename: 'posts.zip'
+        send_data(
+          ExportPostsService.run(post_ids: @posts.pluck(:id)).compressed_filestream.read,
+          filename: 'posts.zip'
+        )
       end
     end
   end
@@ -58,7 +61,10 @@ class PostsController < ApplicationController
     redirect_to post_path(@post)
   end
 
-  def show; end
+  def show
+    @images = @post.attachments.select { |attachment| attachment.image? }
+    @files = @post.attachments.reject { |attachment| attachment.image? }
+  end
 
   def destroy
     @post.destroy
@@ -76,8 +82,7 @@ class PostsController < ApplicationController
       :status,
       :lock_version,
       :region_id,
-      images: [],
-      files: []
+      attachments: []
     )
   end
 

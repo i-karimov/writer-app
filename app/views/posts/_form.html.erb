@@ -21,12 +21,8 @@
     </div>
   <% end %>
   <div class="form-group mb-3 row">
-    <%= f.label "Images (#{@post.images.size})", class: "col-sm-2 col-form-label" %>
-    <%= f.file_field :images, multiple: true, accept: 'image/jpeg, image/png', class: 'form-control' %>
-  </div>
-  <div class="form-group mb-3 row">
-    <%= f.label "Files (#{@post.files.size})", class: "col-sm-2 col-form-label" %>
-    <%= f.file_field :files, multiple: true, class: 'form-control' %>
+    <%= f.label "Attachments (#{@post.attachments.size})", class: "col-sm-2 col-form-label" %>
+    <%= f.file_field :attachments, multiple: true, class: 'form-control' %>
   </div>
   <%= f.hidden_field :lock_version %>
   <%= f.submit 'Submit', class: 'btn btn-primary' %>

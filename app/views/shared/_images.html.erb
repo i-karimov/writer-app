@@ -1,8 +1,9 @@
-<% if object.images.any? %>
+<% if images.any? %>
   <div class="container">
     <div class="flex-container justify-content-center flex-md-wrap">
-      <% object.images.each do |image| %>
-        <%= link_to image_tag(image.variant(:thumb), width: '250px'), url_for(image), class: "img-thumbnail rounded", target: '_blank' %>
+      <% images.each do |image| %>
+        <%= link_to image_tag(image.variable? ? image.variant(resize_to_limit: [250, nil]) : image), 
+                url_for(image), class: "img-thumbnail rounded", target: '_blank' %>
       <% end %>
     </div>
   </div>

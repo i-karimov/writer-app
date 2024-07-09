@@ -3,9 +3,9 @@
   <td> <%= post.title %> </td>
   <td> <%= authored_as_admin_by?(current_user, post) ? 'You' : post.user.short_name %> </td>
   <td class="text-nowrap">
-    <i class="bi bi-images text-primary"><%= post.images.size %></i>
+    <i class="bi bi-images text-primary"><%= post.attachments.size %></i>
     <i class="bi bi-dot"></i>
-    <i class="bi bi-paperclip text-secondary"><%= post.files.size %></i>
+    <i class="bi bi-paperclip text-secondary"><%= post.attachments.reject { |att| att.image? }.size %></i> 
   </td>
   <td class="text-center small"> <%= post.published_at_formatted %> </td>
   <td> <%= post.region.name %> </td>

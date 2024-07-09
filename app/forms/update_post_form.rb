@@ -16,9 +16,8 @@ class UpdatePostForm
     return false unless valid?
 
     post.transaction do
-      post.update(params.except(:images, :files, :status))
-      post.images.attach(params[:images]) unless post.images.attached?
-      post.files.attach(params[:files]) unless post.files.attached?
+      post.update(params.except(:attachments, :status))
+      post.attachments.attach(params[:attachments]) unless post.attachments.attached?
 
       UpdatePostStatusJob.perform_later(post.id, aasm_event) if status_changed?
     end

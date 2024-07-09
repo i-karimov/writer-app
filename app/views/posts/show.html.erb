@@ -16,10 +16,10 @@
 <div class="row">
   <hr />
   <h2>Images</h2>
-  <%= render 'shared/images', object: @post %>
+  <%= render partial: 'shared/images', locals: {images: @images } %>
 </div>
 <div class="row mt-2">
   <hr />
   <h2>Files</h2>
-  <%= render 'shared/files', object: @post %>
+  <%= render partial: 'shared/files', locals: {files: @files } %>
 </div>
