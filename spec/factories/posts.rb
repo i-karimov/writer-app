@@ -5,12 +5,12 @@ FactoryBot.define do
     association :user
     association :region
 
-    trait(:with_image) do
+    trait(:with_attachment) do
       before(:create) do |post|
-        post.images.attach(io: File.open("#{Rails.root}/spec/fixtures/singer.jpg"), filename: 'singer.jpg', content_type: 'image/jpg')
-      end  
+        post.attachments.attach(io: File.open("#{Rails.root.join('spec/fixtures/singer.jpg')}"),
+                                filename: 'singer.jpg', content_type: 'image/jpg')
+      end
     end
-
   end
 end
 

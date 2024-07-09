@@ -17,7 +17,7 @@ class UpdatePostForm
 
     post.transaction do
       post.update(params.except(:attachments, :status))
-      post.attachments.attach(params[:attachments]) unless post.attachments.attached?
+      post.attachments.attach(params[:attachments])
 
       UpdatePostStatusJob.perform_later(post.id, aasm_event) if status_changed?
     end

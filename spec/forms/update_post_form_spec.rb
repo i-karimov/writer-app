@@ -7,9 +7,8 @@ RSpec.describe 'UpdatePostForm' do
     context 'when the form is valid' do
       it 'updates the post and attaches images and files' do
         expect(form).to receive(:valid?).and_return(true)
-        expect(post).to receive(:update).with(params.except(:images, :files, :status))
-        expect(post.images).to receive(:attach).with(params[:images])
-        expect(post.files).to receive(:attach).with(params[:files])
+        expect(post).to receive(:update).with(params.except(:attachments, :status))
+        expect(post.attachments).to receive(:attach).with(params[:attachments])
         expect(UpdatePostStatusJob).to receive(:perform_later).with(post.id, form.aasm_event)
         form.perform
       end
