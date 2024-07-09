@@ -11,7 +11,9 @@ class Post < ApplicationRecord
   belongs_to :region
   belongs_to :user
 
-  has_many_attached :attachments, dependent: :destroy
+  has_many_attached :attachments, dependent: :destroy do |attachable|
+    attachable.variant :preview, resize_to_limit: [300, 300]
+  end
 
   aasm(column: :status) do
     state :draft, initial: true

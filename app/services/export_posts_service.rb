@@ -12,7 +12,7 @@ class ExportPostsService < ApplicationService
   attr_accessor :posts, :renderer
 
   def prepare_posts
-    self.posts = Post.where(id: post_ids)
+    self.posts = Post.includes(attachments_attachments: :blob).where(id: post_ids)
   end
 
   def create_renderer

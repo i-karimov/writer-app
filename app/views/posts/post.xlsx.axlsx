@@ -16,18 +16,15 @@ wb.add_worksheet(name: 'Post') do |sheet|
   current_cell_Y = 6
   image_placement_interval = 10
 
-  post.images.each do |image|
+  post.attachments.select(&:image?).each do |image|
     position = "A#{current_cell_Y}"
     link = Rails.application.routes.url_helpers.url_for image
-    image_src = Rails.application.routes.url_helpers.url_for image.variant(:thumb)
-    metadata = image.variant(:thumb).processed.image.metadata
-    width = metadata[:width]
-    height = metadata[:height]
+    image_src = Rails.application.routes.url_helpers.url_for image.variant(:preview)
 
     sheet.add_image image_src:, noSelect: true, noMove: true, remote: true, start_at: position,
                     hyperlink: link do |insertion_image|
-      insertion_image.width = width
-      insertion_image.height = height
+      insertion_image.width = 300
+      insertion_image.height = 300
     end
 
     current_cell_Y += image_placement_interval
