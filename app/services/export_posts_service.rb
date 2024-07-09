@@ -1,31 +1,35 @@
-# frozen_string_literal: true
-
 class ExportPostsService < ApplicationService
-  attr_reader :post_ids
+  arg :post_ids, type: Array
 
-  def initialize(post_ids)
-    @post_ids = post_ids
-  end
+  step :prepare_posts
+  step :create_renderer
+  step :render_reports
 
-  def call
-    compressed_filestream = output_stream
-
-    compressed_filestream.rewind
-    compressed_filestream
-  end
+  output :compressed_filestream, default: false
 
   private
 
-  def output_stream
-    renderer = ActionController::Base.new
+  attr_accessor :posts, :renderer
 
-    Zip::OutputStream.write_buffer do |zos|
-      Post.where(id: post_ids).find_each do |post|
+  def prepare_posts
+    self.posts = Post.where(id: post_ids)
+  end
+
+  def create_renderer
+    self.renderer = ActionController::Base.new
+  end
+
+  def render_reports
+    output_stream = Zip::OutputStream.write_buffer do |zos|
+      posts.find_each do |post|
         zos.put_next_entry "post_#{post.id}.xlsx"
         zos.print renderer.render_to_string(
           layout: false, handlers: [:axlsx], formats: [:xlsx], template: 'posts/post', locals: { post: post.decorate }
         )
       end
     end
+
+    output_stream.rewind
+    self.compressed_filestream = output_stream
   end
 end

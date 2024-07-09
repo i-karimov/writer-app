@@ -1,7 +1,0 @@
-stages:
-  - build
-  - test
-  - deploy
-dummy job:
-  script:
-    - echo ok

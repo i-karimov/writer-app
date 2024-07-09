@@ -12,7 +12,7 @@ class PostsController < ApplicationController
       format.html {}
 
       format.zip do
-        send_data ExportPostsService.call(@posts.pluck(:id)).read, filename: 'posts.zip'
+        send_data ExportPostsService.run(post_ids: @posts.pluck(:id)).compressed_filestream.read, filename: 'posts.zip'
       end
     end
   end

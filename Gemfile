@@ -13,6 +13,7 @@ gem 'draper'
 gem 'image_processing', '~> 1.2'
 gem 'jsbundling-rails'
 gem 'kaminari'
+gem 'light-services', '~> 2.1'
 gem 'pg', '~> 1.1'
 gem 'puma', '>= 5.0'
 gem 'pundit'
@@ -34,12 +35,12 @@ group :development, :test do
 end
 
 group :development do
+  gem 'annotate'
+  gem 'foreman'
+  gem 'reek'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
-  gem 'annotate'
-  gem 'foreman'
-  gem 'reek'
   gem 'web-console'
 end
