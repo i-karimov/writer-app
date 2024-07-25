@@ -5,7 +5,7 @@ services:
     build:
       context: .
     container_name: web
-    command: bundle exec rails s -b '0.0.0.0' -p 3000
+    command: bin/dev #bundle exec rails s -b '0.0.0.0' -p 3000
     ports:
       - 3000:3000
     volumes: &web-volumes

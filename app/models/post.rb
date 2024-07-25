@@ -15,6 +15,8 @@ class Post < ApplicationRecord
     attachable.variant :preview, resize_to_limit: [300, 300]
   end
 
+  has_rich_text :content
+
   aasm(column: :status) do
     state :draft, initial: true
     state :on_moderation
@@ -57,7 +59,6 @@ end
 # Table name: posts
 #
 #  id           :bigint           not null, primary key
-#  content      :text             not null
 #  lock_version :integer
 #  published_at :datetime
 #  status       :string           not null

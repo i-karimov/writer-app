@@ -4,10 +4,16 @@
     <%= f.label :title, class: "col-sm-2 col-form-label" %>
     <%= f.text_field :title,  placeholder: 'Title', class: 'form-control' %>
   </div>
+    <%# <div class="form-group mb-3 row"> %>
+      <%# <%= f.label :content, class: "col-sm-2 col-form-label" %> 
+      <%# <%= f.text_area :content,  placeholder: 'Content', class: 'form-control col-sm-10', rows: 10 %> 
+    <%# </div> %>
+
   <div class="form-group mb-3 row">
-    <%= f.label :content, class: "col-sm-2 col-form-label" %>
-    <%= f.text_area :content,  placeholder: 'Content', class: 'form-control col-sm-10', rows: 10 %>
+    <%= f.label :content %>
+    <%= f.rich_text_area :content %>
   </div>
+
   <% if current_user.admin_role? %>
     <div class="form-group mb-3 row">
       <%= f.label :region, class: "col-sm-2 col-form-label" %>

@@ -19,7 +19,6 @@ end
 # Table name: posts
 #
 #  id           :bigint           not null, primary key
-#  content      :text             not null
 #  lock_version :integer
 #  published_at :datetime
 #  status       :string           not null
