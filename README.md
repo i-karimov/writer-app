@@ -16,6 +16,7 @@ docker-compose build
 ```
 4. Выполните миграции и предзаполнение таблиц:
 ```bash
+docker-compose run web bundle install
 docker-compose run web bundle exec rails db:prepare
 ```
 5. Запустите приложение на http://localhost:3000:
