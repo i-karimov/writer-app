@@ -29,7 +29,7 @@ docker-compose up
 Запуск тестов:
 
 ```bash
-docker-compose run bundle exec rspec
+docker-compose run web bundle exec rspec
 ```
 
 ## Войти как админ:
