@@ -81,7 +81,7 @@ RSpec.describe 'Posts', type: :request do
       it 'updates the post' do
         patch post_path(the_post), params: valid_params
         expect(the_post.reload.title).to eq('Updated Title')
-        expect(the_post.reload.content).to eq('New content')
+        expect(the_post.reload.content.body.to_plain_text).to eq('New content')
       end
 
       it 'redirects to the posts path' do
